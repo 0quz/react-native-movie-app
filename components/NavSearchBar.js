@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { SvgUri } from 'react-native-svg';
+
 import Item from './Item'
 
 const NavSearchBar = props => {
@@ -24,11 +26,16 @@ const NavSearchBar = props => {
     return(
       <View>
         <View style={styles.container}>
-            <TextInput
-                placeholder="Quick search"
-                onChangeText={search => setSearch(search)}
-                style={styles.searchBar}
-            />
+          <SvgUri
+            width="100%"
+            height="100%"
+            uri="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/android.svg"
+          />
+          <TextInput
+              placeholder="Quick search"
+              onChangeText={search => setSearch(search)}
+              style={styles.searchBar}
+          />
         </View>
           <View>
               {search ? (filterList(list).map((listItem, index) => (
