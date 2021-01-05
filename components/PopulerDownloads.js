@@ -1,14 +1,27 @@
 import React from 'react'
-import { View, Text } from 'react-native'
+import { View, Image, StyleSheet } from 'react-native'
+
+import MovieDetail from './MovieDetail'
 
 const PopulerDownloads = props => {
     return(
-        <View>
-            <Text>
-                Top Main Content (Popular Downloads)
-            </Text>
+        <View style={styles.container}>
+            <View>
+                <MovieDetail/>
+            </View>
+            <View>
+                <MovieDetail/>
+            </View>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container:{
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginTop: 5
+    }
+})
 
 export default PopulerDownloads

@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
-import { SvgUri } from 'react-native-svg';
-
+import { StyleSheet, Text, View, TextInput, Image, Button } from 'react-native';
 import Item from './Item'
 
 const NavSearchBar = props => {
@@ -26,45 +24,44 @@ const NavSearchBar = props => {
     return(
       <View>
         <View style={styles.container}>
-          <SvgUri
-            width="100%"
-            height="100%"
-            uri="https://dev.w3.org/SVG/tools/svgweb/samples/svg-files/android.svg"
+          <Image
+            style={styles.img}
+            source={require('../img/logo-YTS.png')}
           />
           <TextInput
               placeholder="Quick search"
               onChangeText={search => setSearch(search)}
               style={styles.searchBar}
           />
+          <Button title="4K" onPress={() => console.log("4K")}/>
+          <Button title="TR" onPress={() => console.log("TR")}/>
+          <Button title="BM" onPress={() => console.log("BM")}/>
+          <Button title="LG" onPress={() => console.log("LG")}/>
         </View>
-          <View>
-              {search ? (filterList(list).map((listItem, index) => (
-                  <Item key={index} movie={listItem.movie} />
-              ))) : null}
-          </View>
-        </View>
-    )
+        {search ? (filterList(list).map((listItem, index) => (
+            <Item key={index} movie={listItem.movie} />
+        ))) : null}
+      </View>
+  )
 }
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor: 'gray',
-      alignItems: 'center',
+      backgroundColor: '#696969',
+      alignItems: 'center', // yukarıda ve aşağıdan centerlıyor
+      justifyContent: 'center', // sağdan soldan centerlıyor
+      flexDirection: 'row'
     },
     searchBar: {
       fontSize: 12,
       margin: 10,
-      width: '90%',
-      height: 30,
+      width: '40%',
+      height: 35,
       backgroundColor: 'white',
     },
-    itemText: {
-      margin: 10,
-      color: 'white',
-      fontSize: 24,
-      backgroundColor: 'blue',
-      width: '30%',
-      height: 50
+    img: {
+      height: 25,
+      width: 80
     }
   });
 

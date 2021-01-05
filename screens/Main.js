@@ -1,5 +1,6 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, View, ImageBackground, Text, ScrollView } from 'react-native';
+//import { useRoute } from '@react-navigation/native';
 
 import NavSearchBar from '../components/NavSearchBar';
 import InfoPart from '../components/InfoPart';
@@ -8,28 +9,25 @@ import LastestMovies from '../components/LatestMovies';
 import UpcomingMovies from '../components/UpcomingMovies';
 import Footer from '../components/Footer'
 
+import Content from '../screens/Content'
+
 
 const Main = props => {
+  const [content, setContent] = useState(false)
+
   return (
-    <View>
-      <View style={styles.navSearchBar}>
-        <NavSearchBar/>
-      </View>
-      <View>
-        <InfoPart/>
-      </View>
-      <View>
-        <PopulerDownloads/>
-      </View>
-      <View>
-        <LastestMovies/>
-      </View>
-      <View>
-        <UpcomingMovies/>
-      </View>
-      <View>
-        <Footer/>
-      </View>
+    <View style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        <View style={styles.navSearchBar}>
+          <NavSearchBar/>
+        </View>
+        <View>
+          <Content/>
+        </View>
+        <View>
+          <Footer/>
+        </View>
+      </ScrollView>
     </View>
   );
 }
@@ -40,11 +38,15 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    justifyContent: 'flex-start',
     alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 60
   },
   navSearchBar: {
-    height: '50%'
+    backgroundColor: '#696969'
+  },
+  latestYifyMovies: {
+    backgroundColor: '#171717'
   }
 });
 

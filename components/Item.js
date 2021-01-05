@@ -11,15 +11,17 @@ const Item = props => {
 
 const styles = StyleSheet.create({
     container: {
-      backgroundColor: 'blue',
+      backgroundColor: 'gray',
       alignItems: 'center',
-      height: 90,
-      margin: 10,
-      width: '90%'
+      justifyContent: 'center',
+      alignContent: 'center',
+      height: 16,
+      marginHorizontal: 100,
+      marginVertical: 10
     },
     text: {
         color: 'white',
-        fontSize: 24,
+        fontSize: 12,
     }
   });
 
