@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Image, Button } from 'react-native';
-import Item from './Item'
+import { StyleSheet, View, TextInput, Image, Button } from 'react-native';
+import Item from '../components/Item'
 
-const NavSearchBar = props => {
+const NavSearchBarScreen = props => {
     const [search, setSearch] = useState('')
 
     const filterList = list => {
@@ -48,6 +48,7 @@ const NavSearchBar = props => {
 const styles = StyleSheet.create({
     container: {
       backgroundColor: '#696969',
+      marginHorizontal: -16,
       alignItems: 'center', // yukarıda ve aşağıdan centerlıyor
       justifyContent: 'center', // sağdan soldan centerlıyor
       flexDirection: 'row'
@@ -65,4 +66,4 @@ const styles = StyleSheet.create({
     }
   });
 
-export default NavSearchBar
+export default NavSearchBarScreen
