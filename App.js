@@ -19,12 +19,10 @@ function HomeScreen({ navigation }) {
   )
 }
 
-function DetailsScreen({ navigation }) {
+function DetailsScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
-      <Text>Details Screen</Text>
-      <Button title="Go to Home" onPress={() => navigation.navigate('Home')} />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+      <MovieDetailScreen navigation={navigation} route={route}/>
     </View>
   );
 }
@@ -33,7 +31,6 @@ const Stack = createStackNavigator();
 
 /* <StatusBar style="auto" /> */
 
-
 export default function App() {
   return (
     <NavigationContainer>
@@ -41,14 +38,14 @@ export default function App() {
         <Stack.Screen 
         name="Home" 
         component={HomeScreen} 
-        options={{ headerTitle: () => <NavSearchBarScreen/> }}
+        options={{ 
+          headerTitle: () => null }}
         />
         <Stack.Screen 
         name="Details"
         component={DetailsScreen}
         options={{
-          headerTitle: () =>  <NavSearchBarScreen/>, 
-          headerLeft: null}}
+          headerTitle: () => null}}
         />
       </Stack.Navigator>
       <FooterScreen/>

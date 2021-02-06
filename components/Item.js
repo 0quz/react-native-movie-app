@@ -1,10 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 
 const Item = props => {
     return(
         <View style={styles.container}>
-            <Text style={styles.text}>{props.movie}</Text>
+            <TouchableOpacity
+                style={styles.button}
+                onPress={() => 
+                    props.navigation.push('Details',
+                    {originalTitle: props.Title ? props.Title : False})}
+            >
+                <Text style={styles.text}>{props.Title}</Text>
+            </TouchableOpacity>
         </View>
     )
 }
@@ -15,7 +22,7 @@ const styles = StyleSheet.create({
       alignItems: 'center',
       justifyContent: 'center',
       alignContent: 'center',
-      height: 16,
+      maxHeight: 20,
       marginHorizontal: 100,
       marginVertical: 10
     },

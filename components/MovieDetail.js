@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Text, View, StyleSheet, Image, TouchableOpacity } from 'react-native'
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -8,15 +8,17 @@ const MovieDetail = props => {
         <View style={styles.container}>
             <TouchableOpacity
                 style={styles.button}
-                onPress={() => props.navigation.navigate('Details')}
+                onPress={() => 
+                    props.navigation.navigate('Details',
+                    {originalTitle: props.originalTitle ? props.originalTitle : props.originalTitle2})}
             >
-            <Image
-                source={require("../img/medium-cover.jpg")}
-                style={styles.content}
-            />
+                <Image
+                    source={props.poster ? props.poster : props.poster2}
+                    style={styles.content}
+                />
             </TouchableOpacity>
-            <Text style={styles.text}>Movie Name</Text>
-            <Text style={styles.text}>Year</Text>
+            <Text style={styles.text}>{props.originalTitle ? props.originalTitle : props.originalTitle2}</Text>
+            <Text style={styles.text}>{props.year ? props.year : props.year2}</Text>
         </View>
     )
 }

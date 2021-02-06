@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
-import { StyleSheet, View, TextInput, Image, Button } from 'react-native';
+import { StyleSheet, View, TextInput, Image, Button, Text, ScrollView } from 'react-native';
 import Item from '../components/Item'
+import axios from "axios";
 
 const NavSearchBarScreen = props => {
     const [search, setSearch] = useState('')
 
-    const filterList = list => {
-        return list.filter(
-            listItem =>
-                listItem.movie
-                .toLowerCase()
-                .includes(search.toLowerCase())
-        )
+    const filterSearch = search => {
+      axios.get('http://www.omdbapi.com/?s='+search+'&apikey=db666f83')
+      .then(reponse => {
+        if (reponse.data.Response == "True"){
+          setSearch(reponse.data.Search)
+        } else {
+          setSearch('')
+        }
+      })
     }
 
-    const list = [
-        {movie: 'Harry Potter'},
-        {movie: 'The Fast And Furious'},
-        {movie: 'The Lord of the Rings'},
-        {movie: 'Batman'},
-      ];
+    const cleanFilter = () => {
+      setSearch('')
+    }
 
     return(
       <View>
@@ -30,7 +30,7 @@ const NavSearchBarScreen = props => {
           />
           <TextInput
               placeholder="Quick search"
-              onChangeText={search => setSearch(search)}
+              onChangeText={filterSearch}
               style={styles.searchBar}
           />
           <Button title="4K" onPress={() => console.log("4K")}/>
@@ -38,9 +38,11 @@ const NavSearchBarScreen = props => {
           <Button title="BM" onPress={() => console.log("BM")}/>
           <Button title="LG" onPress={() => console.log("LG")}/>
         </View>
-        {search ? (filterList(list).map((listItem, index) => (
-            <Item key={index} movie={listItem.movie} />
-        ))) : null}
+          <View styles={{alignItems: 'stretch'}}>
+          {search ? (search.map((result) => (
+            <Item navigation={props.navigation} key={result.imdbID} Title={result.Title} onClean={cleanFilter}/>
+          ))) : null}
+          </View>
       </View>
   )
 }
@@ -48,10 +50,10 @@ const NavSearchBarScreen = props => {
 const styles = StyleSheet.create({
     container: {
       backgroundColor: '#696969',
-      marginHorizontal: -16,
       alignItems: 'center', // yukarıda ve aşağıdan centerlıyor
       justifyContent: 'center', // sağdan soldan centerlıyor
-      flexDirection: 'row'
+      flexDirection: 'row',
+      flex: 1
     },
     searchBar: {
       fontSize: 12,
