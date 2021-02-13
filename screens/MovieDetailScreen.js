@@ -1,41 +1,57 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, StyleSheet, Text, Button, Image, ImageBackground } from 'react-native'
 import NavSearchBarScreen from './NavSearchBarScreen'
 import { ScrollView } from 'react-native-gesture-handler';
 import axios from "axios"
+import { color, max } from 'react-native-reanimated';
 
 const MovieDetailScreen = props => {
     const [movieDetail, setMovieDetail] = useState([])
-    const {originalTitle} = props.route.params
+    const { originalTitle } = props.route.params
 
     useEffect(() => {
-        axios.get('http://www.omdbapi.com/?t='+originalTitle+'&apikey=db666f83')
-        .then(response => {
-            console.log(response.data)
-            setMovieDetail(response.data)
-        })
+        axios.get('http://www.omdbapi.com/?t=' + originalTitle + '&apikey=db666f83')
+            .then(response => {
+                // console.log(response.data)
+                setMovieDetail(response.data)
+            })
     }, [originalTitle])
 
     return (
         <ScrollView>
-            <NavSearchBarScreen navigation={props.navigation}/>
+            <NavSearchBarScreen navigation={props.navigation} />
             <ImageBackground source={require("../img/background.jpg")}
                 style={{
                     height: 500,
-                    width: 400,
+                    width: '100%',
                     opacity: 1,
-                    alignItems:'center',
-                    resizeMode: 'stretch'
-                    }}
-                >
-                <Text style={styles.text}>{movieDetail.Title}</Text>
-                <Text style={styles.text}>{movieDetail.Year}</Text>
-                <Text style={styles.text}>{movieDetail.Genre}</Text>
-                <Image style={{width: 150, height: 150}} source={{uri: movieDetail.Poster}}/>
-                <Text style={styles.text}>{movieDetail.imdbRating}</Text>
-                <Text style={styles.text}>{movieDetail.Plot}</Text>
-                <Text style={styles.text}>{movieDetail.Director}</Text>
-                <Text style={styles.text}>{movieDetail.Actors}</Text>
+                    alignItems: 'center',
+                    resizeMode: 'stretch',
+                }}
+            >
+                
+                <View style={styles.container}>
+                    <View style={{ flex: 1 }}>
+                        <Image style={styles.imageFrame} source={{ uri: movieDetail.Poster }} />
+                    </View>
+                    <View style={styles.infoBox}>
+                        <Text style={styles.text}>{movieDetail.Title}</Text>
+                        <Text style={styles.text}>{movieDetail.Year}</Text>
+                        <Text style={styles.text}>{movieDetail.Genre}</Text>
+                        <Text style={styles.text}>{movieDetail.imdbRating}</Text>
+                    </View>
+                </View>
+                <View style={styles.container2}>
+                    <Text style={styles.detailsTitle}>Synopsis</Text>
+                    <Text style={styles.detailsText}>{movieDetail.Plot}</Text>
+                    <Text style={styles.detailsTitle}>Director</Text>
+                    <Text style={styles.detailsText}>{movieDetail.Director}</Text>
+                    <Text style={styles.detailsTitle}>Cast</Text>
+                    {/* <Text style={styles.detailsText}>{movieDetail.Actors}</Text> */}
+                    {movieDetail.Actors && movieDetail.Actors.split(', ').map((item, key) => (
+                        <Text key={key} style={styles.detailsText}> {item} </Text>)
+                    )}
+                </View>
             </ImageBackground>
             <Button title="Go to Home" onPress={() => props.navigation.navigate('Home')} />
         </ScrollView>
@@ -44,11 +60,53 @@ const MovieDetailScreen = props => {
 
 const styles = StyleSheet.create({
     container: {
-        
+        flex: 1,
+        backgroundColor: 'rgba( 25, 25, 25, 0.8)',
+        padding: 10,
+        width: '100%',
+        // backgroundColor: 'red',
+        // justifyContent: 'space-between',
+        flexDirection: 'row', borderBottomColor: 'silver',
+        borderBottomWidth: 1,
+    },
+    container2: {
+        flex: 2,
+        height: 150,
+        padding: 10,
+        // justifyContent: 'space-around',
+        backgroundColor: 'rgba(25, 25, 25, 0.8)',
+    },
+    infoBox: {
+        alignItems: 'flex-end',
+        flex: 2,
+        maxWidth: 200,
+        justifyContent: 'space-around',
     },
     text: {
-        color: 'white'
+        color: 'white',
+        textAlign: 'right',
+
+    },
+    detailsText: {
+        margin: 5,
+        color: 'silver',
+        textAlign: 'left',
+    },
+    detailsTitle: {
+        margin: 5,
+        fontWeight: 'bold',
+        color: 'white',
+        textAlign: 'left',
+    },
+    imageFrame: {
+        width: 150,
+        height: 150,
+        borderRadius: 10,
+        borderColor: 'white',
+        borderWidth: 3,
+        // background: rgba(76, 175, 80, 0.3)
     }
+
 })
 
 export default MovieDetailScreen

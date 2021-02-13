@@ -15,33 +15,33 @@ const ContentScreen = props => {
     const [title, setTitle] = useState([])
     const [year, setYear] = useState([])
 
-    return(
+    return (
         <ScrollView>
-            <NavSearchBarScreen navigation={props.navigation}/>
+            <NavSearchBarScreen navigation={props.navigation} />
             <ImageBackground source={require("../img/background.jpg")}
                 style={{
                     height: 500,
                     width: 400,
                     opacity: 1,
-                    alignItems:'center',
+                    alignItems: 'center',
                     resizeMode: 'stretch'
-                    }}
-                >
+                }}
+            >
                 <View>
-                    <InfoPart/>
+                    <InfoPart />
                 </View>
                 <View>
-                    <PopulerDownloads navigation={props.navigation} originalTitle={"The Matrix"} originalTitle2={"Se7en"} year={"1999"} year2={"1995"} poster={require('../img/the-matrix.jpg')} poster2={require('../img/se7en.jpg')}/>
-                    <PopulerDownloads navigation={props.navigation} originalTitle={"The Godfather"} originalTitle2={"Star Wars"} year={"1972"} year2={"1977"} poster={require('../img/the-godfather.jpg')} poster2={require('../img/star-wars.jpg')}/>
+                    <PopulerDownloads navigation={props.navigation} originalTitle={"The Matrix"} originalTitle2={"Se7en"} year={"1999"} year2={"1995"} poster={require('../img/the-matrix.jpg')} poster2={require('../img/se7en.jpg')} />
+                    <PopulerDownloads navigation={props.navigation} originalTitle={"The Godfather"} originalTitle2={"Star Wars"} year={"1972"} year2={"1977"} poster={require('../img/the-godfather.jpg')} poster2={require('../img/star-wars.jpg')} />
                 </View>
             </ImageBackground>
             <View style={styles.latestYifyMovies}>
-                <LastestMovies/>
-                <PopulerDownloads navigation={props.navigation}/>
-                <PopulerDownloads navigation={props.navigation}/>
+                <LastestMovies />
+                <PopulerDownloads navigation={props.navigation} />
+                <PopulerDownloads navigation={props.navigation} />
             </View>
             <View>
-                <UpcomingMovies/>
+                <UpcomingMovies />
             </View>
         </ScrollView>
     )
@@ -51,6 +51,6 @@ const styles = StyleSheet.create({
     latestYifyMovies: {
         backgroundColor: '#171717',
     }
-  });
+});
 
 export default ContentScreen
