@@ -14,7 +14,7 @@ const MovieDetail = props => {
             >
                 <Image
                     source={props.poster ? props.poster : props.poster2}
-                    style={styles.content}
+                    style={styles.imageFrame}
                 />
             </TouchableOpacity>
             <Text style={styles.text}>{props.originalTitle ? props.originalTitle : props.originalTitle2}</Text>
@@ -27,9 +27,11 @@ const styles = StyleSheet.create({
     container: {
         alignItems: 'center'
     },
-    content: {
-        resizeMode: 'stretch',
-        maxHeight: 180,
+    imageFrame: {
+        borderRadius: 10,
+        borderWidth: 1,
+        borderColor: 'white',
+        maxHeight: 257,
         maxWidth: 180,
         marginHorizontal: 8
     },

@@ -12,9 +12,9 @@ import MovieDetail from './components/MovieDetail'
 
 
 function HomeScreen({ navigation }) {
-  return(
+  return (
     <View style={styles.container}>
-      <ContentScreen navigation={navigation}/>
+      <ContentScreen navigation={navigation} />
     </View>
   )
 }
@@ -22,7 +22,7 @@ function HomeScreen({ navigation }) {
 function DetailsScreen({ navigation, route }) {
   return (
     <View style={styles.container}>
-      <MovieDetailScreen navigation={navigation} route={route}/>
+      <MovieDetailScreen navigation={navigation} route={route} />
     </View>
   );
 }
@@ -34,29 +34,33 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
+      <StatusBar style="auto" />
       <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen 
-        name="Home" 
-        component={HomeScreen} 
-        options={{ 
-          headerTitle: () => null }}
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            headerTitle: () => null, headerShown: false
+          }}
         />
-        <Stack.Screen 
-        name="Details"
-        component={DetailsScreen}
-        options={{
-          headerTitle: () => null}}
+        <Stack.Screen
+          name="Details"
+          component={DetailsScreen}
+          options={{
+            headerTitle: () => null, headerShown: false
+          }}
         />
       </Stack.Navigator>
-      <FooterScreen/>
+      {/* <FooterScreen/> */}
     </NavigationContainer>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1, 
-    alignItems: 'center', 
+    marginTop: 70,
+    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center'
   }
 });

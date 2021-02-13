@@ -1,13 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useCallback, useState } from 'react'
 import { View, StyleSheet, Text, Button, Image, ImageBackground } from 'react-native'
 import NavSearchBarScreen from './NavSearchBarScreen'
 import { ScrollView } from 'react-native-gesture-handler';
 import axios from "axios"
-import { color, max } from 'react-native-reanimated';
+// import YoutubePlayer from "react-native-youtube-iframe";
 
 const MovieDetailScreen = props => {
     const [movieDetail, setMovieDetail] = useState([])
     const { originalTitle } = props.route.params
+    
+    // const [playing, setPlaying] = useState(false);
+
+    // const onStateChange = useCallback((state) => {
+    //     if (state === "ended") {
+    //         setPlaying(false);
+    //         Alert.alert("video has finished playing!");
+    //     }
+    // }, []);
+
+    // const togglePlaying = useCallback(() => {
+    //     setPlaying((prev) => !prev);
+    // }, []);
+
 
     useEffect(() => {
         axios.get('http://www.omdbapi.com/?t=' + originalTitle + '&apikey=db666f83')
@@ -22,14 +36,14 @@ const MovieDetailScreen = props => {
             <NavSearchBarScreen navigation={props.navigation} />
             <ImageBackground source={require("../img/background.jpg")}
                 style={{
-                    height: 500,
+                    height: 621,
                     width: '100%',
                     opacity: 1,
                     alignItems: 'center',
                     resizeMode: 'stretch',
                 }}
             >
-                
+
                 <View style={styles.container}>
                     <View style={{ flex: 1 }}>
                         <Image style={styles.imageFrame} source={{ uri: movieDetail.Poster }} />
@@ -42,6 +56,13 @@ const MovieDetailScreen = props => {
                     </View>
                 </View>
                 <View style={styles.container2}>
+                    {/* <YoutubePlayer
+                        height={300}
+                        play={playing}
+                        videoId={"iee2TATGMyI"}
+                        onChangeState={onStateChange}
+                    />
+                    <Button title={playing ? "pause" : "play"} onPress={togglePlaying} /> */}
                     <Text style={styles.detailsTitle}>Synopsis</Text>
                     <Text style={styles.detailsText}>{movieDetail.Plot}</Text>
                     <Text style={styles.detailsTitle}>Director</Text>
@@ -60,7 +81,7 @@ const MovieDetailScreen = props => {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: .8,
         backgroundColor: 'rgba( 25, 25, 25, 0.8)',
         padding: 10,
         width: '100%',
@@ -70,7 +91,7 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
     },
     container2: {
-        flex: 2,
+        flex: 1,
         height: 150,
         padding: 10,
         // justifyContent: 'space-around',
@@ -100,7 +121,7 @@ const styles = StyleSheet.create({
     },
     imageFrame: {
         width: 150,
-        height: 150,
+        height: 250,
         borderRadius: 10,
         borderColor: 'white',
         borderWidth: 3,
