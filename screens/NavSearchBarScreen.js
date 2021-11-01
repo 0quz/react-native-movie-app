@@ -24,10 +24,6 @@ const NavSearchBarScreen = props => {
     return(
       <View>
         <View style={styles.container}>
-          <Image
-            style={styles.img}
-            source={require('../img/logo.png')}
-          />
           <TextInput
               placeholder="Quick search"
               onChangeText={filterSearch}
