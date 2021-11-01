@@ -26,7 +26,7 @@ const NavSearchBarScreen = props => {
         <View style={styles.container}>
           <Image
             style={styles.img}
-            source={require('../img/logo-YTS.png')}
+            source={require('../img/logo.png')}
           />
           <TextInput
               placeholder="Quick search"
